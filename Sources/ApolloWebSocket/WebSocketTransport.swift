@@ -83,6 +83,14 @@ public class WebSocketTransport: NetworkTransport, WebSocketDelegate {
     return websocket.write(ping: data, completion: completionHandler)
   }
 
+  public func connect() {
+    websocket.connect()
+  }
+
+  public func disconnect() {
+    websocket.disconnect()
+  }
+
   private func processMessage(socket: WebSocketClient, text: String) {
     OperationMessage(serialized: text).parse { (type, id, payload, error) in
       guard let type = type, let messageType = OperationMessage.Types(rawValue: type) else {
